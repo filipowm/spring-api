@@ -6,22 +6,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.filipowm</groupId>
     <artifactId>spring-api</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Spring API</name>
+    <description>Simplify managing REST API in Spring</description>
+    <url>https://github.com/filipowm/spring-api</url>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>spring-api-starter</module>
         <module>spring-api-core</module>
     </modules>
-    <name>Spring API</name>
-    <description>Simplify managing REST API in Spring</description>
-    <url>https://github.com/filipowm/spring-api</url>
-
-    <licenses>
-        <license>
-            <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
 
     <properties>
         <java.version>11</java.version>
@@ -203,6 +197,14 @@
             <url>https://maven.pkg.github.com/filipowm/spring-api</url>
         </repository>
     </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
     <developers>
         <developer>
             <name>Mateusz Filipowicz</name>
