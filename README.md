@@ -14,7 +14,7 @@
 <div align="center">
 <br />
 
-[![CI](https://img.shields.io/github/workflow/status/filipowm/spring-api/CI/main?style=flat-square)](https://github.com/filipowm/spring-api/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/workflow/status/filipowm/spring-api/CI-CD/main?style=flat-square)](https://github.com/filipowm/spring-api/actions/workflows/ci.yml)
 [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=filipowm_spring-api&metric=alert_status&style=flat-square)](https://sonarcloud.io/project/overview?id=filipowm_spring-api)
 [![Last Commit](https://img.shields.io/github/last-commit/filipowm/spring-api/main?style=flat-square)](https://github.com/filipowm/spring-api/commits/main)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/filipowm/spring-api?style=flat-square)](https://github.com/filipowm/spring-api/pulse)
