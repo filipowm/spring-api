@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  pl.filipowm.api.SpringApiAutoConfiguration
+  io.github.filipowm.api.SpringApiAutoConfiguration
