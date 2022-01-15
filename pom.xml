@@ -108,7 +108,7 @@
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
-                                <phase>deploy</phase>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>jar-no-fork</goal>
                                 </goals>
@@ -126,7 +126,7 @@
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
-                                <phase>deploy</phase>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -221,13 +221,7 @@
             </plugin>
         </plugins>
     </build>
-<!--    <distributionManagement>-->
-<!--        <repository>-->
-<!--            <id>github</id>-->
-<!--            <name>GitHub Spring API Maven repository</name>-->
-<!--            <url>https://maven.pkg.github.com/filipowm/spring-api</url>-->
-<!--        </repository>-->
-<!--    </distributionManagement>-->
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -249,10 +243,9 @@
         </developer>
     </developers>
 
-
     <scm>
         <connection>scm:git:git://github.com/filipowm/spring-api.git</connection>
-        <developerConnection>scm:git:ssh://github.com:filipowm/spring-api.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com/filipowm/spring-api.git</developerConnection>
         <url>https://github.com/filipowm/spring-api/tree/main</url>
     </scm>
 </project>
