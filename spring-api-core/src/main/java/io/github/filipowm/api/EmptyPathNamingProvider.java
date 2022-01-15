@@ -8,7 +8,7 @@ import io.github.filipowm.api.annotations.Api;
  *
  * Implement this interface to enable custom handling
  * for path mappings with unspecified path in {@link Api}.
- * By default path name is derived from name of class annotated with {@link io.swagger.annotations.Api}
+ * By default path name is derived from name of class annotated with {@link io.github.filipowm.api.annotations.Api}
  *
  * @see BasePathNamingProvider
  */

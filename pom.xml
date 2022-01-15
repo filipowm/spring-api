@@ -94,11 +94,12 @@
                         <artifactId>maven-release-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                            <preparationGoals>clean verify</preparationGoals>
-                            <tagNameFormat>v@{project.version}</tagNameFormat>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <releaseProfiles>release</releaseProfiles>
                             <goals>deploy</goals>
+                            <preparationGoals>clean verify</preparationGoals>
+                            <releaseProfiles>release</releaseProfiles>
+                            <scmCommentPrefix>chore(release): </scmCommentPrefix>
+                            <tagNameFormat>@{project.version}</tagNameFormat>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -178,7 +179,7 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>false</autoReleaseAfterClose>
-
+                    <indentSize>4</indentSize>
                 </configuration>
             </plugin>
             <plugin>
@@ -244,8 +245,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/filipowm/spring-api.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/filipowm/spring-api.git</developerConnection>
+        <connection>scm:git:git://git@github.com/filipowm/spring-api.git</connection>
+        <developerConnection>scm:git:https://git@github.com/filipowm/spring-api.git</developerConnection>
         <url>https://github.com/filipowm/spring-api/tree/main</url>
     </scm>
 </project>
