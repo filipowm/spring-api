@@ -61,6 +61,7 @@ or based on microservices. Goal of this library is to:
 ## <a id="getting-started"></a> 🚀 Getting Started
 
 This library works with Java 11 and Spring Boot 2+ / Spring 5+.
+It is preferred to use `spring-api-starter` with Spring Boot.
 
 1. Add dependency:
     - Maven:
