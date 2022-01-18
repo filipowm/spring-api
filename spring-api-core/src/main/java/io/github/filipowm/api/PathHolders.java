@@ -2,43 +2,57 @@ package io.github.filipowm.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
+import org.springframework.web.util.pattern.PathPatternParser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-class PathHolders implements VersionTarget {
+public class PathHolders implements VersionTarget {
 
     private final String pathPrefix;
+
     private final String versionPrefix;
+
     private final List<PathHolder> holders = new ArrayList<>();
+
     private String version;
 
-    void add(String path) {
+    public void add(String path) {
         add(PathHolder.with(path, pathPrefix, versionPrefix));
     }
 
-    void add(PathHolder holder) {
+    public void add(PathHolder holder) {
         this.holders.add(holder);
     }
 
-    void applyApi(String api) {
+    public void applyApi(String api) {
         holders.forEach(holder -> holder.setApi(api));
     }
 
-    void applyContext(String context) {
+    public void applyContext(String context) {
         holders.forEach(holder -> holder.setContext(context));
     }
 
-    void applyVersion(String version) {
+    public void applyVersion(String version) {
         ApiUtils.applyVersion(holders, version);
     }
 
-    PatternsRequestCondition toCondition() {
+    public PatternsRequestCondition toCondition() {
         var paths = holders.stream()
-                .map(PathHolder::toPath)
-                .toArray(String[]::new);
+                           .map(PathHolder::toPath)
+                           .toArray(String[]::new);
         return new PatternsRequestCondition(paths);
+    }
+
+    public org.springframework.web.reactive.result.condition.PatternsRequestCondition toReactiveCondition() {
+        var parser = new PathPatternParser();
+        var paths = holders.stream()
+                           .map(PathHolder::toPath)
+                           .map(parser::parse)
+                           .collect(Collectors.toList());
+        return new org.springframework.web.reactive.result.condition.PatternsRequestCondition(paths);
     }
 
     public String getPathPrefix() {

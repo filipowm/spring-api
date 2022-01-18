@@ -1,5 +1,6 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.servlet.ServletApiVersioningContentTypeStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +27,7 @@ class ApiVersionContentStrategyTest extends BaseApiTest {
     
     private ApiVersionNamingProvider provider = mock(ApiVersionNamingProvider.class);
 
-    private final ApiVersioningContentTypeStrategy strategy = new ApiVersioningContentTypeStrategy(provider, ApiTestHelper.CONTENT_TYPE_VND, ApiTestHelper.VERSION_PREFIX);
+    private final ServletApiVersioningContentTypeStrategy strategy = new ServletApiVersioningContentTypeStrategy(provider, ApiTestHelper.CONTENT_TYPE_VND, ApiTestHelper.VERSION_PREFIX);
 
     private static Stream<Arguments> contentTypes() {
         return Stream.of(

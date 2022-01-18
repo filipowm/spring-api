@@ -1,5 +1,6 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RequestMappingHandlerMappingIntTest {
 
     @Autowired
-    private ApiRequestMappingHandlerMapping mapping;
+    private ServletApiRequestMappingHandlerMapping mapping;
 
     @Test
     void shouldManageApiHandlerMappings() {

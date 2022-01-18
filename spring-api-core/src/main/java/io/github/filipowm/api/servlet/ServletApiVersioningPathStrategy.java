@@ -1,5 +1,11 @@
-package io.github.filipowm.api;
+package io.github.filipowm.api.servlet;
 
+import io.github.filipowm.api.AbstractApiVersioningStrategy;
+import io.github.filipowm.api.ApiBuilder;
+import io.github.filipowm.api.ApiUtils;
+import io.github.filipowm.api.ApiVersionNamingProvider;
+import io.github.filipowm.api.VersionTarget;
+import io.github.filipowm.api.servlet.ServletApiBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
@@ -16,11 +22,11 @@ import java.util.stream.Collectors;
  * then new pattern will added (current won't be replaced and will still exist)
  */
 @Slf4j
-public class ApiVersioningPathStrategy extends AbstractApiVersioningStrategy implements InitializingBean {
+public class ServletApiVersioningPathStrategy extends AbstractApiVersioningStrategy<RequestMappingInfo> implements InitializingBean {
 
     private final String versionPrefix;
 
-    public ApiVersioningPathStrategy(ApiVersionNamingProvider namingProvider, String versionPrefix) {
+    public ServletApiVersioningPathStrategy(ApiVersionNamingProvider namingProvider, String versionPrefix) {
         super(namingProvider);
         this.versionPrefix = versionPrefix;
     }
@@ -41,7 +47,7 @@ public class ApiVersioningPathStrategy extends AbstractApiVersioningStrategy imp
     }
 
     @Override
-    protected VersionTarget getVersionTarget(ApiBuilder builder) {
+    protected VersionTarget getVersionTarget(ApiBuilder<?> builder) {
         return builder.getPathHolders();
     }
 

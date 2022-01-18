@@ -1,5 +1,8 @@
-package io.github.filipowm.api;
+package io.github.filipowm.api.servlet;
 
+import io.github.filipowm.api.ApiDecorator;
+import io.github.filipowm.api.ApiToRequestMappingMapper;
+import io.github.filipowm.api.EmptyPathNamingProvider;
 import io.github.filipowm.api.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -21,7 +24,7 @@ import java.util.List;
  * It uses {@link ApiDecorator} objects to customize endpoint mappings.
  */
 @Slf4j
-public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
+public class ServletApiRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 
     private final List<ApiDecorator> apiDecorators;
 
@@ -33,9 +36,9 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
 
     private final String contentTypeVnd;
 
-    public ApiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators,
-                                           EmptyPathNamingProvider pathNamingProvider,
-                                           String pathPrefix, String versionPrefix, String contentTypeVnd) {
+    public ServletApiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators,
+                                                  EmptyPathNamingProvider pathNamingProvider,
+                                                  String pathPrefix, String versionPrefix, String contentTypeVnd) {
         this.apiDecorators = apiDecorators;
         this.pathPrefix = pathPrefix;
         this.versionPrefix = versionPrefix;
@@ -87,14 +90,14 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
         var api = AnnotationUtils.findAnnotation(handlerType, Api.class);
         if (api != null) {
             var current = info.toString();
-            var builder = new ApiBuilder(api, method, handlerType, info, pathPrefix, versionPrefix, contentTypeVnd);
+            var builder = new ServletApiBuilder(api, method, handlerType, info, pathPrefix, versionPrefix, contentTypeVnd);
             info = getMappingForApi(builder);
             log.info("Enhanced request mapping from {} to {}", current, info);
         }
         return info;
     }
 
-    private RequestMappingInfo getMappingForApi(final ApiBuilder builder) {
+    private RequestMappingInfo getMappingForApi(final ServletApiBuilder builder) {
         apiDecorators.stream()
                      .filter(decorator -> decorator.supports(builder))
                      .forEach(decorator -> decorator.decorate(builder));

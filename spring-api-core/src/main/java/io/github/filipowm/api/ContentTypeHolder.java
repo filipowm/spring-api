@@ -5,7 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 
 @AllArgsConstructor
-final class ContentTypeHolder implements VersionTarget {
+public final class ContentTypeHolder implements VersionTarget {
 
     private MediaType contentType;
     private final String contentVnd;

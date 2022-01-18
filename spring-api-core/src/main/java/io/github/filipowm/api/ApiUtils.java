@@ -9,11 +9,11 @@ import java.util.List;
 import static io.github.filipowm.api.annotations.ApiVersion.UNVERSIONED;
 
 @UtilityClass
-class ApiUtils {
+public class ApiUtils {
 
-    static final String PATH_DELIMETER = "/";
+    public static final String PATH_DELIMETER = "/";
 
-    int extractVersionFromPath(String path, String versionPrefix) {
+    public int extractVersionFromPath(String path, String versionPrefix) {
         int version = UNVERSIONED;
         if (!StringUtils.hasLength(path)) {
             return version;
@@ -48,7 +48,7 @@ class ApiUtils {
         return UNVERSIONED;
     }
 
-    int extractVersionFromContentType(String contentType, String contentVnd, String versionPrefix) {
+    public int extractVersionFromContentType(String contentType, String contentVnd, String versionPrefix) {
         if (!StringUtils.hasLength(contentType) || !contentType.contains(contentVnd)) {
             return UNVERSIONED;
         }
@@ -70,7 +70,7 @@ class ApiUtils {
         return extractFromPrefix(builder.toString(), versionPrefix);
     }
 
-    static void applyVersion(List<? extends VersionTarget> targets, String version) {
+    public static void applyVersion(List<? extends VersionTarget> targets, String version) {
         targets.forEach(target -> target.setVersion(version));
     }
 }

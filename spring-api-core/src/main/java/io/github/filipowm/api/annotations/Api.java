@@ -1,7 +1,7 @@
 package io.github.filipowm.api.annotations;
 
 import io.github.filipowm.api.ApiPathEnhancer;
-import io.github.filipowm.api.ApiRequestMappingHandlerMapping;
+import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
 import io.github.filipowm.api.ApiVersionStrategy;
 import io.github.filipowm.api.BasePathNamingProvider;
 import io.github.filipowm.api.ContextPathEnhancer;
@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 
 /**
  * Use this annotation to mark your controllers eligible for spring-api handling. It is applicable only on type-level.
- * Controllers marked with <b>@Api</b> will be registered by {@link ApiRequestMappingHandlerMapping}
+ * Controllers marked with <b>@Api</b> will be registered by {@link ServletApiRequestMappingHandlerMapping}
  * Configuration is similar to {@link org.springframework.web.bind.annotation.RequestMapping}, but currently limited to:
  * <ul>
  *     <li><pre>value</pre></li>

@@ -57,6 +57,7 @@ or based on microservices. Goal of this library is to:
 - configure base API context (useful especially in microservices)
 - provide default endpoint names when not set explicitly
 - handy utilities removing boilerplate code used to define endpoints with Spring
+- support both "standard" Servlet-based API as well as Reactive API 
 
 ## <a id="getting-started"></a> 🚀 Getting Started
 
@@ -93,10 +94,6 @@ or
 @Api(value = "/hello")
 @ApiVersion(2)
 ```
-
-**Note:** Currently versioning individual endpoints within a class is not possible.
-Thus it is recommended to create separate controller classes responsible for handling
-different API versions.
 
 **Examples:**  
 

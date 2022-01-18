@@ -1,6 +1,7 @@
 package io.github.filipowm.api;
 
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import io.github.filipowm.api.servlet.ServletApiVersioningContentTypeStrategy;
+import io.github.filipowm.api.servlet.ServletApiVersioningPathStrategy;
 
 import java.util.Set;
 
@@ -9,15 +10,15 @@ import java.util.Set;
  *
  * <p><b>IMPORTANT:</b> only ONE versioning strategy can be used</p>
  *
- * @see ApiVersioningContentTypeStrategy
- * @see ApiVersioningPathStrategy
+ * @see ServletApiVersioningContentTypeStrategy
+ * @see ServletApiVersioningPathStrategy
  */
-public interface ApiVersionStrategy extends ApiDecorator {
+public interface ApiVersionStrategy<T> extends ApiDecorator {
 
-    Set<Integer> parseVersion(RequestMappingInfo requestMappingInfo);
+    Set<Integer> parseVersion(T requestMappingInfo);
 
     @Override
-    default boolean supports(ApiBuilder builder) {
+    default boolean supports(ApiBuilder<?> builder) {
         return true;
     }
 }

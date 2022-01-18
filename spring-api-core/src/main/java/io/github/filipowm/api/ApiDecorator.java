@@ -1,8 +1,11 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.servlet.ServletApiBuilder;
+import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
+
 /**
  * Objects implementing this interface must be responsible
- * for customizing API handled by {@link ApiRequestMappingHandlerMapping}.
+ * for customizing API handled by {@link ServletApiRequestMappingHandlerMapping}.
  *
  * If you want to customize how API is built, simply implement
  * this interface and register implementation as a Spring Bean. It will be then
@@ -12,12 +15,12 @@ public interface ApiDecorator {
 
     /**
      * Method responsible for customizing API.
-     * Operate indirectly on {@link ApiBuilder},
+     * Operate indirectly on {@link ServletApiBuilder},
      * which then is used to build final mapping definition
      *
      * @param builder API builder
      */
-    void decorate(ApiBuilder builder);
+    void decorate(ApiBuilder<?> builder);
 
     /**
      * Control which API endpoints should be handled by this customizer.
@@ -25,6 +28,6 @@ public interface ApiDecorator {
      * @param builder API builder
      * @return true, if this object should be used to customize API, otherwise false
      */
-    boolean supports(ApiBuilder builder);
+    boolean supports(ApiBuilder<?> builder);
 
 }

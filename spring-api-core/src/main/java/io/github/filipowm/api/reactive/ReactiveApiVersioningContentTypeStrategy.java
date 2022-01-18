@@ -1,22 +1,27 @@
-package io.github.filipowm.api;
+package io.github.filipowm.api.reactive;
 
+import io.github.filipowm.api.AbstractApiVersioningStrategy;
+import io.github.filipowm.api.ApiBuilder;
+import io.github.filipowm.api.ApiUtils;
+import io.github.filipowm.api.ApiVersionNamingProvider;
+import io.github.filipowm.api.VersionTarget;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.MimeType;
-import org.springframework.web.servlet.mvc.condition.MediaTypeExpression;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.reactive.result.condition.MediaTypeExpression;
+import org.springframework.web.reactive.result.method.RequestMappingInfo;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class ApiVersioningContentTypeStrategy extends AbstractApiVersioningStrategy implements InitializingBean {
+public class ReactiveApiVersioningContentTypeStrategy extends AbstractApiVersioningStrategy<RequestMappingInfo> implements InitializingBean {
 
     private final String contentTypeVnd;
 
     private final String versionPrefix;
 
-    public ApiVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider, String contentTypeVnd, String versionPrefix) {
+    public ReactiveApiVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider, String contentTypeVnd, String versionPrefix) {
         super(namingProvider);
         this.contentTypeVnd = contentTypeVnd;
         this.versionPrefix = versionPrefix;
@@ -45,7 +50,7 @@ public class ApiVersioningContentTypeStrategy extends AbstractApiVersioningStrat
     }
 
     @Override
-    protected VersionTarget getVersionTarget(ApiBuilder builder) {
+    protected VersionTarget getVersionTarget(ApiBuilder<?> builder) {
         return builder.getContentTypeHolders();
     }
 

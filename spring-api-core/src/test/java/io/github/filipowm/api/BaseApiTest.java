@@ -1,5 +1,6 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.servlet.ServletApiBuilder;
 import org.mockito.Mockito;
 import org.springframework.web.servlet.mvc.condition.ConsumesRequestCondition;
 import org.springframework.web.servlet.mvc.condition.HeadersRequestCondition;
@@ -63,23 +64,23 @@ class BaseApiTest {
         return createRequestMappingInfo(consumes, produces, BASE_PATH);
     }
 
-    ApiBuilder createBuilder(RequestMappingInfo info, Api api, Method method, Class handlerType) {
-        return new ApiBuilder(api, method, handlerType, info, ApiTestHelper.PATH_PREFIX, ApiTestHelper.VERSION_PREFIX, ApiTestHelper.CONTENT_TYPE_VND);
+    ServletApiBuilder createBuilder(RequestMappingInfo info, Api api, Method method, Class handlerType) {
+        return new ServletApiBuilder(api, method, handlerType, info, ApiTestHelper.PATH_PREFIX, ApiTestHelper.VERSION_PREFIX, ApiTestHelper.CONTENT_TYPE_VND);
     }
 
-    ApiBuilder createBuilder() {
+    ServletApiBuilder createBuilder() {
         return createBuilder(createRequestMappingInfo(), Mockito.mock(Api.class));
     }
 
-    ApiBuilder createBuilder(RequestMappingInfo info) {
+    ServletApiBuilder createBuilder(RequestMappingInfo info) {
         return createBuilder(info, Mockito.mock(Api.class));
     }
 
-    ApiBuilder createBuilder(Api api) {
+    ServletApiBuilder createBuilder(Api api) {
         return createBuilder(createRequestMappingInfo(), api);
     }
 
-    ApiBuilder createBuilder(RequestMappingInfo info, Api api) {
+    ServletApiBuilder createBuilder(RequestMappingInfo info, Api api) {
         return createBuilder(info, api, ApiTestController.class.getDeclaredMethods()[0], ApiTestController.class);
     }
 

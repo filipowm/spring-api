@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-final class PathHolder implements VersionTarget {
+public final class PathHolder implements VersionTarget {
 
     private final List<String> subPaths = new ArrayList<>();
 
@@ -139,10 +139,14 @@ final class PathHolder implements VersionTarget {
         }
     }
 
-    String toPath() {
+    public String toPath() {
         var joiner = new StringJoiner(ApiUtils.PATH_DELIMETER);
         subPaths.forEach(joiner::add);
-        return joiner.toString();
+        var path = joiner.toString();
+        if (!path.startsWith("/")) {
+            return "/" + path;
+        }
+        return path;
     }
 
 }

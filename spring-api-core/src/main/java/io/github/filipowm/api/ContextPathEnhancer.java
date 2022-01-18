@@ -17,7 +17,7 @@ public class ContextPathEnhancer implements ApiDecorator, InitializingBean {
     }
 
     @Override
-    public void decorate(ApiBuilder builder) {
+    public void decorate(ApiBuilder<?> builder) {
         var apiContext = builder.getApi().baseContext();
         var context = StringUtils.hasLength(apiContext) ? apiContext : baseContext;
         if (StringUtils.hasLength(context)) {
@@ -26,7 +26,7 @@ public class ContextPathEnhancer implements ApiDecorator, InitializingBean {
     }
 
     @Override
-    public boolean supports(ApiBuilder builder) {
+    public boolean supports(ApiBuilder<?> builder) {
         return builder.getApi() != null;
     }
 }

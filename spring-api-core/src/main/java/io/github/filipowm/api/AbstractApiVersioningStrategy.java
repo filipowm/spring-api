@@ -2,17 +2,14 @@ package io.github.filipowm.api;
 
 import io.github.filipowm.api.annotations.ApiVersion;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-
-import java.util.Set;
 
 @RequiredArgsConstructor
-abstract class AbstractApiVersioningStrategy implements ApiVersionStrategy {
+public abstract class AbstractApiVersioningStrategy<T> implements ApiVersionStrategy<T> {
 
     private final ApiVersionNamingProvider namingProvider;
 
     @Override
-    public void decorate(ApiBuilder builder) {
+    public void decorate(ApiBuilder<?> builder) {
         var apiVersion = builder.getApiVersion();
         if (apiVersion == null || apiVersion.value() == ApiVersion.UNVERSIONED) {
             return;
@@ -22,14 +19,9 @@ abstract class AbstractApiVersioningStrategy implements ApiVersionStrategy {
         getVersionTarget(builder).setVersion(convertedVersion);
     }
 
-    @Override
-    public Set<Integer> parseVersion(RequestMappingInfo requestMappingInfo) {
-        return null; //TODO
-    }
-
     protected String convertVersion(String version) {
         return version;
     }
 
-    protected abstract VersionTarget getVersionTarget(ApiBuilder builder);
+    protected abstract VersionTarget getVersionTarget(ApiBuilder<?> builder);
 }

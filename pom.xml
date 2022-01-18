@@ -13,6 +13,8 @@
     <modules>
         <module>spring-api-starter</module>
         <module>spring-api-core</module>
+        <module>spring-api-starter/spring-api-tests/spring-reactive-api-test</module>
+        <module>spring-api-starter/spring-api-tests/spring-servlet-api-test</module>
     </modules>
 
     <properties>
@@ -24,6 +26,7 @@
         <slf4j.version>1.7.33</slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <dependencyManagement>

@@ -32,7 +32,7 @@ class PathHolderTest {
         assertThat(holder.isApi()).isEqualTo(isApi);
         assertThat(holder.getApiPrefix()).isEqualTo(isApi ? API_PREFIX : null);
         assertThat(holder.getVersion()).isEqualTo(version);
-        assertThat(holder.toPath()).isEqualTo(path);
+        assertThat(holder.toPath()).isEqualTo('/' + path);
 
         // when:
         holder.setApi(API_PREFIX);
@@ -87,6 +87,10 @@ class PathHolderTest {
             }
             sb.insert(position, context + '/');
         }
-        return sb.toString();
+        var builtPath = sb.toString();
+        if (!builtPath.startsWith("/")) {
+            return "/" + builtPath;
+        }
+        return builtPath;
     }
 }

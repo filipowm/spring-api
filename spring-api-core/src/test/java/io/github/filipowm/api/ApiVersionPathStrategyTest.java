@@ -1,5 +1,6 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.servlet.ServletApiVersioningPathStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -18,7 +19,7 @@ class ApiVersionPathStrategyTest extends BaseApiTest {
 
     private ApiVersionNamingProvider provider = mock(ApiVersionNamingProvider.class);
 
-    private final ApiVersioningPathStrategy strategy = new ApiVersioningPathStrategy(provider, ApiTestHelper.VERSION_PREFIX);
+    private final ServletApiVersioningPathStrategy strategy = new ServletApiVersioningPathStrategy(provider, ApiTestHelper.VERSION_PREFIX);
 
     @BeforeEach
     void setup() {

@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @NoArgsConstructor
-class ContentTypeHolders implements VersionTarget {
+public class ContentTypeHolders implements VersionTarget {
 
     private final List<ContentTypeHolder> consumes = new ArrayList<>();
 
@@ -18,16 +18,24 @@ class ContentTypeHolders implements VersionTarget {
 
     private String version;
 
-    void applyVersion(String version) {
+    public void applyVersion(String version) {
         ApiUtils.applyVersion(consumes, version);
         ApiUtils.applyVersion(produces, version);
     }
 
-    Pair<ConsumesRequestCondition, ProducesRequestCondition> toCondition() {
+    public Pair<ConsumesRequestCondition, ProducesRequestCondition> toCondition() {
         var consumesArr = apply(this.consumes);
         var producesArr = apply(this.produces);
         var consumesCondition = new ConsumesRequestCondition(consumesArr);
         var producesCondition = new ProducesRequestCondition(producesArr);
+        return Pair.of(consumesCondition, producesCondition);
+    }
+
+    public Pair<org.springframework.web.reactive.result.condition.ConsumesRequestCondition, org.springframework.web.reactive.result.condition.ProducesRequestCondition> toReactiveCondition() {
+        var consumesArr = apply(this.consumes);
+        var producesArr = apply(this.produces);
+        var consumesCondition = new org.springframework.web.reactive.result.condition.ConsumesRequestCondition(consumesArr);
+        var producesCondition = new org.springframework.web.reactive.result.condition.ProducesRequestCondition(producesArr);
         return Pair.of(consumesCondition, producesCondition);
     }
 
@@ -38,11 +46,11 @@ class ContentTypeHolders implements VersionTarget {
                    .toArray(String[]::new);
     }
 
-    void addConsumes(String consumes, String contentVnd) {
+    public void addConsumes(String consumes, String contentVnd) {
         this.consumes.add(ContentTypeHolder.of(consumes, contentVnd));
     }
 
-    void addProduces(String produces, String contentVnd) {
+    public void addProduces(String produces, String contentVnd) {
         this.produces.add(ContentTypeHolder.of(produces, contentVnd));
     }
 

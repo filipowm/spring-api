@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.lang.annotation.Annotation;
 
 //TODO add support for name, headers and method(?)
-final class ApiToRequestMappingMapper {
+public final class ApiToRequestMappingMapper {
 
     public static RequestMapping map(final Api api) {
         return map(api, null, null);

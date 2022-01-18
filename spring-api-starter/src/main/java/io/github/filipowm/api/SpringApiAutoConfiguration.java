@@ -1,6 +1,12 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.reactive.ReactiveApiRequestMappingHandlerMapping;
+import io.github.filipowm.api.reactive.ReactiveApiVersioningPathStrategy;
+import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
+import io.github.filipowm.api.servlet.ServletApiVersioningContentTypeStrategy;
+import io.github.filipowm.api.servlet.ServletApiVersioningPathStrategy;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -14,6 +20,7 @@ import java.util.List;
 @Configuration
 @EnableConfigurationProperties(ApiProperties.class)
 @RequiredArgsConstructor
+@Slf4j
 class SpringApiAutoConfiguration {
 
     private final ApiProperties apiProperties;
@@ -37,13 +44,30 @@ class SpringApiAutoConfiguration {
         return new ContextPathEnhancer(apiProperties.getBaseContext());
     }
 
-    @Bean
-    ApiRequestMappingHandlerMapping apiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
-        return new ApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.getPathPrefix(), apiProperties.getVersioning().getVersionPrefix(), apiProperties.getVersioning().getContentTypeVnd());
+    @Configuration
+    @ConditionalOnServletStack
+    class ServletApiConfiguration {
+
+        @Bean
+        ServletApiRequestMappingHandlerMapping servletApiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
+            return new ServletApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.getPathPrefix(), apiProperties.getVersioning().getVersionPrefix(),
+                                                              apiProperties.getVersioning().getContentTypeVnd());
+        }
     }
 
     @Configuration
-    @ConditionalOnProperty(value = "spring.api.versioning.enabled", havingValue = "true")
+    @ConditionalOnReactiveStack
+    class ReactiveApiConfiguration {
+
+        @Bean
+        ReactiveApiRequestMappingHandlerMapping reactiveApiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
+            return new ReactiveApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.getPathPrefix(), apiProperties.getVersioning().getVersionPrefix(),
+                                                               apiProperties.getVersioning().getContentTypeVnd());
+        }
+    }
+
+    @Configuration
+    @ConditionalOnProperty(value = "spring.api.versioning.enabled", havingValue = "true", matchIfMissing = true)
     class ApiVersioningConfiguration {
         @Bean
         @ConditionalOnMissingBean(ApiVersionNamingProvider.class)
@@ -54,15 +78,33 @@ class SpringApiAutoConfiguration {
         @Bean
         @ConditionalOnProperty(value = "spring.api.versioning.versionInContentType", havingValue = "false", matchIfMissing = true)
         @ConditionalOnMissingBean(ApiVersionStrategy.class)
-        ApiVersionStrategy apiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
-            return new ApiVersioningPathStrategy(namingProvider, apiProperties.getVersioning().getVersionPrefix());
+        @ConditionalOnServletStack
+        ApiVersionStrategy servletApiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
+            return new ServletApiVersioningPathStrategy(namingProvider, apiProperties.getVersioning().getVersionPrefix());
+        }
+
+        @Bean
+        @ConditionalOnProperty(value = "spring.api.versioning.versionInContentType", havingValue = "false", matchIfMissing = true)
+        @ConditionalOnMissingBean(ApiVersionStrategy.class)
+        @ConditionalOnReactiveStack
+        ApiVersionStrategy reactiveApiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
+            return new ReactiveApiVersioningPathStrategy(namingProvider, apiProperties.getVersioning().getVersionPrefix());
         }
 
         @Bean
         @ConditionalOnProperty(value = "spring.api.versioning.versionInContentType", havingValue = "true")
         @ConditionalOnMissingBean(ApiVersionStrategy.class)
-        ApiVersionStrategy apiVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider) {
-            return new ApiVersioningContentTypeStrategy(namingProvider, apiProperties.getVersioning().getContentTypeVnd(), apiProperties.getVersioning().getVersionPrefix());
+        @ConditionalOnServletStack
+        ApiVersionStrategy servletVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider) {
+            return new ServletApiVersioningContentTypeStrategy(namingProvider, apiProperties.getVersioning().getContentTypeVnd(), apiProperties.getVersioning().getVersionPrefix());
+        }
+
+        @Bean
+        @ConditionalOnProperty(value = "spring.api.versioning.versionInContentType", havingValue = "true")
+        @ConditionalOnMissingBean(ApiVersionStrategy.class)
+        @ConditionalOnReactiveStack
+        ApiVersionStrategy reactiveVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider) {
+            return new ServletApiVersioningContentTypeStrategy(namingProvider, apiProperties.getVersioning().getContentTypeVnd(), apiProperties.getVersioning().getVersionPrefix());
         }
     }
 }

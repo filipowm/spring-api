@@ -1,5 +1,7 @@
 package io.github.filipowm.api;
 
+import io.github.filipowm.api.servlet.ServletApiVersioningPathStrategy;
+import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +26,8 @@ class TestConfiguration {
     }
 
     @Bean
-    ApiRequestMappingHandlerMapping apiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
-        return new ApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, ApiTestHelper.PATH_PREFIX, ApiTestHelper.VERSION_PREFIX, ApiTestHelper.CONTENT_TYPE_VND);
+    ServletApiRequestMappingHandlerMapping apiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
+        return new ServletApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, ApiTestHelper.PATH_PREFIX, ApiTestHelper.VERSION_PREFIX, ApiTestHelper.CONTENT_TYPE_VND);
     }
     @Bean
     ApiVersionNamingProvider apiVersionNamingProvider() {
@@ -33,8 +35,8 @@ class TestConfiguration {
     }
 
     @Bean
-    ApiVersioningPathStrategy apiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
-        return new ApiVersioningPathStrategy(namingProvider, ApiTestHelper.VERSION_PREFIX);
+    ServletApiVersioningPathStrategy apiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
+        return new ServletApiVersioningPathStrategy(namingProvider, ApiTestHelper.VERSION_PREFIX);
     }
 
 }
