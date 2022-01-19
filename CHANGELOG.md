@@ -4,11 +4,10 @@
 
 Changes unreleased.
 
-## 1.1.0
-
 ### Feature
 
 - general:
+  - support SpringDoc OpenAPI documentation generation ([590aacb](https://github.com/filipowm/spring-api/commit/590aacb3be847761ccaca5bba00bbe0019001fb5))
   - support reactive API with Spring WebFlux ([28b5d0e](https://github.com/filipowm/spring-api/commit/28b5d0ef54363fe822afa60acade50c83c1a3b97))
   - allow versioning individual endpoints in single controller ([76310de](https://github.com/filipowm/spring-api/commit/76310de152724bd7986df598b4af0e53a8cd8cde))
   - initiate Spring API ([feba0df](https://github.com/filipowm/spring-api/commit/feba0df3afce6618fd3fd5e3c8d29be600def7a6))
@@ -16,6 +15,7 @@ Changes unreleased.
 ### Documentation
 
 - general:
+  - update readme to 1.1.0 ([a20fded](https://github.com/filipowm/spring-api/commit/a20fded9647866d07f34260d062d6cf5528375fc)) ([#15](https://github.com/filipowm/spring-api/pull/15))
   - update docs ([cc6a2ab](https://github.com/filipowm/spring-api/commit/cc6a2ab6354ea0cf77668cfe1fd9cfd716de2a01)) ([#13](https://github.com/filipowm/spring-api/pull/13))
   - getting started and configuration properties info to readme ([bbede2c](https://github.com/filipowm/spring-api/commit/bbede2cb7ec33e8958dd958c7b4660ea0ad13678))
   - fix javadoc error ([263e62f](https://github.com/filipowm/spring-api/commit/263e62f0050be8dfd3cf260d20b7e95934e9b89b)) ([#11](https://github.com/filipowm/spring-api/pull/11))
