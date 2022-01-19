@@ -7,8 +7,12 @@ import io.github.filipowm.api.servlet.ServletApiVersioningContentTypeStrategy;
 import io.github.filipowm.api.servlet.ServletApiVersioningPathStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +25,8 @@ import java.util.List;
 @EnableConfigurationProperties(ApiProperties.class)
 @RequiredArgsConstructor
 @Slf4j
-class SpringApiAutoConfiguration {
+@ConditionalOnWebApplication
+public class SpringApiAutoConfiguration {
 
     private final ApiProperties apiProperties;
 
@@ -46,6 +51,7 @@ class SpringApiAutoConfiguration {
 
     @Configuration
     @ConditionalOnServletStack
+    @AutoConfigureAfter(ServletWebServerFactoryAutoConfiguration.class)
     class ServletApiConfiguration {
 
         @Bean
@@ -57,6 +63,7 @@ class SpringApiAutoConfiguration {
 
     @Configuration
     @ConditionalOnReactiveStack
+    @AutoConfigureAfter(WebFluxAutoConfiguration.class)
     class ReactiveApiConfiguration {
 
         @Bean
