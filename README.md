@@ -75,12 +75,12 @@ when it detects SpringDoc is being used.
         <dependency>
             <groupId>io.github.filipowm</groupId>
             <artifactId>spring-api-starter</artifactId>
-            <version>1.1.0</version>
+            <version>1.2.0</version>
         </dependency>
       ```
     - Gradle:
       ```groovy
-      implementation 'io.github.filipowm:spring-api-starter:1.1.0'
+      implementation 'io.github.filipowm:spring-api-starter:1.2.0'
       ```
 
 2. To customize library configuration, check [🔧 Configuration Properties](#configuration-properties) section.
