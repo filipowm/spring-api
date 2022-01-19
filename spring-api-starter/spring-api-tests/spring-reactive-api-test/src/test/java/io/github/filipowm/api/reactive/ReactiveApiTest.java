@@ -4,9 +4,12 @@ import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springdoc.core.OpenAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+
+import java.util.Locale;
 
 import static io.restassured.RestAssured.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +22,9 @@ class ReactiveApiTest {
 
     @Autowired
     private ReactiveApiRequestMappingHandlerMapping reactiveApiRequestMappingHandlerMapping;
+
+    @Autowired
+    private OpenAPIService openAPIService;
 
     @BeforeEach
     void setup() {
@@ -44,5 +50,16 @@ class ReactiveApiTest {
     @Test
     void shouldCreateProperBeans() {
         assertThat(reactiveApiRequestMappingHandlerMapping).isNotNull();
+    }
+
+    @Test
+    void shouldGenerateApiDocs() {
+        // when
+        openAPIService.build(Locale.US);
+
+        // then
+        var mappings = openAPIService.getMappingsMap();
+        assertThat(mappings).containsKey("testController");
+        assertThat(mappings.get("testController").getClass()).isEqualTo(TestController.class);
     }
 }

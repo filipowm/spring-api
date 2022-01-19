@@ -58,11 +58,16 @@ or based on microservices. Goal of this library is to:
 - provide default endpoint names when not set explicitly
 - handy utilities removing boilerplate code used to define endpoints with Spring
 - support both "standard" Servlet-based API as well as Reactive API 
+- support OpenAPI 3.0 generation using [SpringDoc](https://springdoc.org/) library
 
 ## <a id="getting-started"></a> 🚀 Getting Started
 
 This library works with Java 11 and Spring Boot 2+ / Spring 5+.
 It is preferred to use `spring-api-starter` with Spring Boot.
+
+When starter is used, it automatically detects whether you are using `webmvc` (servlet approach)
+or `webflux` (reactive approach). Additionally, it automatically configure SpringDoc OpenAPI generation
+when it detects SpringDoc is being used.
 
 1. Add dependency:
     - Maven:
@@ -155,6 +160,5 @@ Using this configuration endpoints may look like `/rest/v2/warehouse/hello`.
 
 1. Detect endpoints collisions and block application from starting.
 1. Allow using `contentTypeVnd` independently of content type versioning.
-1. Support OpenAPI definition using Swagger library.
 
 If you see a need to other features, please create an issue.

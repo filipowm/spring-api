@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.filipowm</groupId>
     <artifactId>spring-api</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <name>Spring API</name>
     <description>Simplify managing REST API in Spring</description>
     <url>https://github.com/filipowm/spring-api</url>
