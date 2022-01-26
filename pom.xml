@@ -23,7 +23,7 @@
         <lombok.version>1.18.22</lombok.version>
         <jacoco.version>0.8.7</jacoco.version>
         <junit.version>5.8.2</junit.version>
-        <slf4j.version>1.7.33</slf4j.version>
+        <slf4j.version>1.7.35</slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.deploy.skip>true</maven.deploy.skip>
