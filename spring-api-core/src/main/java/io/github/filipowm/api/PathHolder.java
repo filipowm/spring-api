@@ -2,6 +2,7 @@ package io.github.filipowm.api;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString
 public final class PathHolder implements VersionTarget {
 
     private final List<String> subPaths = new ArrayList<>();

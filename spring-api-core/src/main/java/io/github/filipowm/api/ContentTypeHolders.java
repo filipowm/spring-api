@@ -23,12 +23,12 @@ public class ContentTypeHolders implements VersionTarget {
         ApiUtils.applyVersion(produces, version);
     }
 
-    public Pair<ConsumesRequestCondition, ProducesRequestCondition> toCondition() {
-        var consumesArr = apply(this.consumes);
-        var producesArr = apply(this.produces);
-        var consumesCondition = new ConsumesRequestCondition(consumesArr);
-        var producesCondition = new ProducesRequestCondition(producesArr);
-        return Pair.of(consumesCondition, producesCondition);
+    public String[] toConsumes() {
+        return apply(this.consumes);
+    }
+
+    public String[] toProduces() {
+        return apply(this.produces);
     }
 
     public Pair<org.springframework.web.reactive.result.condition.ConsumesRequestCondition, org.springframework.web.reactive.result.condition.ProducesRequestCondition> toReactiveCondition() {

@@ -8,7 +8,7 @@ import io.github.filipowm.api.annotations.ApiVersion;
 @ApiVersion(2)
 class TestController {
 
-    @GetMapping("aaa")
+    @GetMapping("aaa/{id}")
     String doAction() {
         return "test";
     }

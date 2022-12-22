@@ -1,6 +1,7 @@
 package io.github.filipowm.api;
 
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.util.pattern.PathPatternParser;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@ToString
 public class PathHolders implements VersionTarget {
 
     private final String pathPrefix;
@@ -39,11 +41,10 @@ public class PathHolders implements VersionTarget {
         ApiUtils.applyVersion(holders, version);
     }
 
-    public PatternsRequestCondition toCondition() {
-        var paths = holders.stream()
-                           .map(PathHolder::toPath)
-                           .toArray(String[]::new);
-        return new PatternsRequestCondition(paths);
+    public String[] toPaths() {
+        return holders.stream()
+                      .map(PathHolder::toPath)
+                      .toArray(String[]::new);
     }
 
     public org.springframework.web.reactive.result.condition.PatternsRequestCondition toReactiveCondition() {
