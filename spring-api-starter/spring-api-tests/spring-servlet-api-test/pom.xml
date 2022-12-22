@@ -11,7 +11,7 @@
     <artifactId>spring-servlet-api-test</artifactId>
 
     <properties>
-        <spring-boot.version>2.7.5</spring-boot.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 

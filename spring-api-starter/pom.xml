@@ -11,7 +11,7 @@
     <artifactId>spring-api-starter</artifactId>
 
     <properties>
-        <spring-boot.version>2.7.5</spring-boot.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
         <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
 
