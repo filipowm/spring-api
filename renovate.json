@@ -3,7 +3,7 @@
   "extends": [
     "config:base",
     ":semanticCommits"
-  ]
+  ],
   "assignees": [
     "renovate"
   ],
@@ -22,6 +22,5 @@
       ],
       "groupName": "Spring Framework dependencies"
     }
-  ],
-
+  ]
 }
