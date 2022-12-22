@@ -1,13 +1,12 @@
 package io.github.filipowm.api.reactive;
 
-import io.github.filipowm.api.servlet.ServletApiRequestMappingHandlerMapping;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springdoc.core.OpenAPIService;
+import org.springdoc.core.service.OpenAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.util.Locale;
 

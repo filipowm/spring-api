@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
  * Spring API configuration properties.
  */
 @ConfigurationProperties(prefix = "spring.api")
-@ConstructorBinding
 @Getter
 @EqualsAndHashCode
 @ToString
@@ -45,7 +44,6 @@ public class ApiProperties {
     @Getter
     @EqualsAndHashCode
     @ToString
-    @ConstructorBinding
     public static class ApiVersioningProperties {
 
         /**

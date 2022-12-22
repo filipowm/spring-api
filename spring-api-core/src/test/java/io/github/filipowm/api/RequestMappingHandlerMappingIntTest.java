@@ -28,7 +28,7 @@ class RequestMappingHandlerMappingIntTest {
     void shouldManageApiHandlerMappings() {
         assertThat(mapping.getHandlerMethods())
             .hasSize(2)
-            .hasEntrySatisfying(expectedPathInController(TestController.class, "/api/v2/mytest/aaa"))
+            .hasEntrySatisfying(expectedPathInController(TestController.class, "/api/v2/mytest/aaa/{id}"))
             .hasEntrySatisfying(expectedPathInController(ApiTestController.class, "/api/v1/apiTest"));
     }
 
@@ -39,7 +39,7 @@ class RequestMappingHandlerMappingIntTest {
 
     private static boolean verify(RequestMappingInfo info, HandlerMethod method, Class controllerClass, String path) {
         var beanType = method.getBeanType();
-        var actualPath = info.getPatternsCondition().getPatterns().stream().findFirst().get();
+        var actualPath = info.getPatternValues().stream().findFirst().get();
         return beanType == controllerClass && path.equals(actualPath);
     }
 }

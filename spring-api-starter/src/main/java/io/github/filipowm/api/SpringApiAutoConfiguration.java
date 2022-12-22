@@ -7,6 +7,7 @@ import io.github.filipowm.api.servlet.ServletApiVersioningContentTypeStrategy;
 import io.github.filipowm.api.servlet.ServletApiVersioningPathStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,10 +19,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(ApiProperties.class)
 @RequiredArgsConstructor
 @Slf4j
