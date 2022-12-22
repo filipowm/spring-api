@@ -36,7 +36,7 @@ public class SpringApiAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(ApiPathEnhancer.class)
     ApiPathEnhancer apiPathEnhancer() {
-        return new ApiPathEnhancer(apiProperties.getPathPrefix());
+        return new ApiPathEnhancer(apiProperties.pathPrefix());
     }
 
     @Bean
@@ -49,7 +49,7 @@ public class SpringApiAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(ContextPathEnhancer.class)
     ContextPathEnhancer contextPathEnhancer() {
-        return new ContextPathEnhancer(apiProperties.getBaseContext());
+        return new ContextPathEnhancer(apiProperties.baseContext());
     }
 
     @Configuration
@@ -59,8 +59,8 @@ public class SpringApiAutoConfiguration {
 
         @Bean
         ServletApiRequestMappingHandlerMapping servletApiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
-            return new ServletApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.getPathPrefix(), apiProperties.getVersioning().getVersionPrefix(),
-                                                              apiProperties.getVersioning().getContentTypeVnd());
+            return new ServletApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.pathPrefix(), apiProperties.versioning().versionPrefix(),
+                                                              apiProperties.versioning().contentTypeVnd());
         }
     }
 
@@ -71,8 +71,8 @@ public class SpringApiAutoConfiguration {
 
         @Bean
         ReactiveApiRequestMappingHandlerMapping reactiveApiRequestMappingHandlerMapping(List<ApiDecorator> apiDecorators, EmptyPathNamingProvider pathNamingProvider) {
-            return new ReactiveApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.getPathPrefix(), apiProperties.getVersioning().getVersionPrefix(),
-                                                               apiProperties.getVersioning().getContentTypeVnd());
+            return new ReactiveApiRequestMappingHandlerMapping(apiDecorators, pathNamingProvider, apiProperties.pathPrefix(), apiProperties.versioning().versionPrefix(),
+                                                               apiProperties.versioning().contentTypeVnd());
         }
     }
 
@@ -82,7 +82,7 @@ public class SpringApiAutoConfiguration {
         @Bean
         @ConditionalOnMissingBean(ApiVersionNamingProvider.class)
         ApiVersionNamingProvider apiVersionNamingProvider() {
-            return new ApiVersionNamingProvider(apiProperties.getVersioning().getVersionPrefix());
+            return new ApiVersionNamingProvider(apiProperties.versioning().versionPrefix());
         }
 
         @Bean
@@ -90,7 +90,7 @@ public class SpringApiAutoConfiguration {
         @ConditionalOnMissingBean(ApiVersionStrategy.class)
         @ConditionalOnServletStack
         ApiVersionStrategy servletApiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
-            return new ServletApiVersioningPathStrategy(namingProvider, apiProperties.getVersioning().getVersionPrefix());
+            return new ServletApiVersioningPathStrategy(namingProvider, apiProperties.versioning().versionPrefix());
         }
 
         @Bean
@@ -98,7 +98,7 @@ public class SpringApiAutoConfiguration {
         @ConditionalOnMissingBean(ApiVersionStrategy.class)
         @ConditionalOnReactiveStack
         ApiVersionStrategy reactiveApiVersioningPathStrategy(ApiVersionNamingProvider namingProvider) {
-            return new ReactiveApiVersioningPathStrategy(namingProvider, apiProperties.getVersioning().getVersionPrefix());
+            return new ReactiveApiVersioningPathStrategy(namingProvider, apiProperties.versioning().versionPrefix());
         }
 
         @Bean
@@ -106,7 +106,7 @@ public class SpringApiAutoConfiguration {
         @ConditionalOnMissingBean(ApiVersionStrategy.class)
         @ConditionalOnServletStack
         ApiVersionStrategy servletVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider) {
-            return new ServletApiVersioningContentTypeStrategy(namingProvider, apiProperties.getVersioning().getContentTypeVnd(), apiProperties.getVersioning().getVersionPrefix());
+            return new ServletApiVersioningContentTypeStrategy(namingProvider, apiProperties.versioning().contentTypeVnd(), apiProperties.versioning().versionPrefix());
         }
 
         @Bean
@@ -114,7 +114,7 @@ public class SpringApiAutoConfiguration {
         @ConditionalOnMissingBean(ApiVersionStrategy.class)
         @ConditionalOnReactiveStack
         ApiVersionStrategy reactiveVersioningContentTypeStrategy(ApiVersionNamingProvider namingProvider) {
-            return new ServletApiVersioningContentTypeStrategy(namingProvider, apiProperties.getVersioning().getContentTypeVnd(), apiProperties.getVersioning().getVersionPrefix());
+            return new ServletApiVersioningContentTypeStrategy(namingProvider, apiProperties.versioning().contentTypeVnd(), apiProperties.versioning().versionPrefix());
         }
     }
 }
