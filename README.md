@@ -115,7 +115,7 @@ These examples use default Spring API configuration.
     }
     ```
 
-- following snippet would generate `POST /api/v2/my-awesome-api/hi` endpoint returning `201 Accepted` status  
+- following snippet would generate `POST /api/v2/my-awesome-api/hi` endpoint returning `202 Accepted` status  
     ```java
     @Api("/my-awesome-api")
     @ApiVersion(2)
@@ -124,6 +124,25 @@ These examples use default Spring API configuration.
         @PostMapping("hi")
         String get() {
             return "Hello World";
+        }
+    }
+    ```
+    
+ - following snippet would generate `GET /api/v2/awesome/my-api` and `GET /api/v3/awesome/my-api` endpoints returning `200 OK` status
+    ```java
+    @Api(value = "/my-api", baseContext = "awesome", version = @ApiVersion(2))
+    class HelloController {
+    
+        @GetMapping
+        String get() {
+            return "v2 Hello World";
+        }
+        
+        @Ok
+        @GetMapping
+        @ApiVersion(3)
+        String getNew() {
+            return "v3 Hello World";
         }
     }
     ```
