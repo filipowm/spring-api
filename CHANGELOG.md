@@ -25,6 +25,3 @@
 
 * initiate Spring API ([feba0df](https://github.com/filipowm/spring-api/commit/feba0df3afce6618fd3fd5e3c8d29be600def7a6))
 * support SpringDoc OpenAPI documentation generation ([590aacb](https://github.com/filipowm/spring-api/commit/590aacb3be847761ccaca5bba00bbe0019001fb5))
-
-
-
