@@ -62,7 +62,7 @@ or based on microservices. Goal of this library is to:
 
 ## <a id="getting-started"></a> 🚀 Getting Started
 
-This library works with Java 17 and Spring Boot 2+ / Spring 5+.
+This library works with Java 17 and Spring Boot 3 / Spring Framework 6.
 It is preferred to use `spring-api-starter` with Spring Boot.
 
 When starter is used, it automatically detects whether you are using `webmvc` (servlet approach)
@@ -75,12 +75,12 @@ when it detects SpringDoc is being used.
         <dependency>
             <groupId>io.github.filipowm</groupId>
             <artifactId>spring-api-starter</artifactId>
-            <version>1.2.0</version>
+            <version>2.0.0</version>
         </dependency>
       ```
     - Gradle:
       ```groovy
-      implementation 'io.github.filipowm:spring-api-starter:1.2.0'
+      implementation 'io.github.filipowm:spring-api-starter:2.0.0'
       ```
 
 2. To customize library configuration, check [🔧 Configuration Properties](#configuration-properties) section.
